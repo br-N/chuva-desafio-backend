@@ -13,6 +13,8 @@ class BaseCountry implements CountryInterface {
    * @var string
    */
   protected $name;
+  protected $neighbors_list;
+  protected $troops = 3;
 
   /**
    * Builder.
@@ -24,4 +26,41 @@ class BaseCountry implements CountryInterface {
     $this->name = $name;
   }
 
+  public function getName(): string{
+    return $this->name;
+  }
+
+  public function setNeighbors(array $neighbors): void{
+    $this->neighbors_list = [
+      $this->name => $neighbors,
+    ];
+  }
+
+  public function getNeighbors(): array{
+    return $this->neighbors_list[$this->name];
+  }
+
+  public function getNumberOfTroops(): int{
+    return $this->troops;
+  }
+
+  public function isConquered(): bool{
+    if ($this->troops<1){
+      return True;
+    }else{
+      return False;
+    }
+  }
+
+  public function conquer(CountryInterface $conqueredCountry): void{
+    if($conqueredCountry->getNumberOfTroops()<1){
+      $this->neighbors_list = [
+        $this->name => $conqueredCountry->getNeighbors(),
+      ];
+    }
+  }
+
+  public function killTroops(int $killedTroops): void{
+    $this->troops -= $killedTroops;
+  }
 }
