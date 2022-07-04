@@ -39,5 +39,6 @@ class Battlefield implements BattlefieldInterface {
                 $defense++;
             }
         }
+        # ... continua ...
     }
 }

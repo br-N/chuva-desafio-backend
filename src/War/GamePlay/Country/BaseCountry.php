@@ -31,13 +31,11 @@ class BaseCountry implements CountryInterface {
   }
 
   public function setNeighbors(array $neighbors): void{
-    $this->neighbors_list = [
-      $this->name => $neighbors,
-    ];
+    $this->neighbors_list = array($this->name => $neighbors);
   }
 
   public function getNeighbors(): array{
-    return $this->neighbors_list[$this->name];
+    return $this->neighbors_list;
   }
 
   public function getNumberOfTroops(): int{
