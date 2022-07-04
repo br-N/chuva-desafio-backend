@@ -22,7 +22,6 @@ class Battlefield implements BattlefieldInterface {
             $dice = rand(1,6);
             $roll[$i] += $dice;
         }
-        echo "\ntestando 1 2 3\n";
 
         return $roll;
     }

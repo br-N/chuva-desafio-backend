@@ -22,8 +22,6 @@ class ComputerPlayerCountry extends BaseCountry {
     $x = rand(1,2);
     if($x==1){
       $y = rand(0, count($this->getNeighbors()));
-      print($this->getNeighbors()[$y]);
-      print("\n\n");
       return $this->getNeighbors()[$y];
     }else{
       return NULL;
