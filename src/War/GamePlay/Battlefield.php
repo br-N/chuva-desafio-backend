@@ -13,14 +13,14 @@ class Battlefield implements BattlefieldInterface {
         $roll = array();
 
         if ($isAtacking){
-            $max = $this->country->getNumberOfTroops() - 1;
+            $max = $country->getNumberOfTroops() - 1;
         }else{
-            $max = $this->country->getNumberOfTroops();
+            $max = $country->getNumberOfTroops();
         }
 
         for ($i=0; $i<$max; $i++){
             $dice = rand(1,6);
-            $roll[$i] += $dice;
+            $roll[$i] = $dice;
         }
 
         return $roll;
@@ -28,14 +28,15 @@ class Battlefield implements BattlefieldInterface {
 
     public function computeBattle(CountryInterface $attackingCountry, array $attackingDice, CountryInterface $defendingCountry, array $defendingDice): void{
         $rounds = (count($attackingDice) <= count($defendingDice)) ? count($attackingDice) : count($defendingDice);
+        rsort($attackingDice);
+        rsort($defendingDice);
         $attack = 0;
         $defense = 0;
-
         for($i=0; $i<$rounds; $i++){
-            if(sort($attackingDice)[$i] > sort($defendingDice)[$i]){
-                $attack++;
+            if($attackingDice[$i] > $defendingDice[$i]){
+                $attack += 1;
             }else{
-                $defense++;
+                $defense += 1;
             }
         }
         # ... continua ...
