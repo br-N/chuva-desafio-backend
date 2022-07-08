@@ -13,7 +13,7 @@ class BaseCountry implements CountryInterface {
    * @var string
    */
   protected $name;
-  protected $neighbors_list;
+  protected $neighbors_list = [];
   protected $troops = 3;
 
   /**
@@ -31,7 +31,9 @@ class BaseCountry implements CountryInterface {
   }
 
   public function setNeighbors(array $neighbors): void{
-    $this->neighbors_list = array($this->name => $neighbors);
+    for($i=0; $i<count($neighbors); $i++){
+      $this->neighbors_list += [$neighbors[$i]->name => $neighbors[$i]->name];
+    }
   }
 
   public function getNeighbors(): array{
