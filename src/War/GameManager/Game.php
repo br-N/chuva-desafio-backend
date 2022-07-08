@@ -130,6 +130,9 @@ class Game {
           print "  " . $defendingCountry->getName() . " conseguiu se defender!\n";
         }
       }
+      foreach($this->getUnconqueredCountries() as $country){
+        $country->troops += 3;
+      }
       sleep(1);
     }
   }

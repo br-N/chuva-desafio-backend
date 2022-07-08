@@ -14,7 +14,7 @@ class BaseCountry implements CountryInterface {
    */
   protected $name;
   protected $neighbors_list = [];
-  protected $troops = 3;
+  public $troops = 3;
 
   /**
    * Builder.
