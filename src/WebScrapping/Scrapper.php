@@ -3,6 +3,63 @@
 namespace Galoa\ExerciciosPhp2022\WebScrapping;
 
 use DOMXPath;
+use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
+use Box\Spout\Writer\Common\Creator\Style\StyleBuilder;
+use Box\Spout\Common\Entity\Style\CellAlignment;
+
+$writer = WriterEntityFactory::createXLSXWriter();
+$writer->openToFile('model.xlsx');
+
+$style = (new StyleBuilder())
+        ->setFontBold()
+        ->setFontSize(13)
+        ->setShouldWrapText()
+        ->setCellAlignment(CellAlignment::RIGHT)
+        ->build();
+        
+$cells = [
+  WriterEntityFactory::createCell('ID', $style),
+  WriterEntityFactory::createCell('Title', $style),
+  WriterEntityFactory::createCell('Type', $style),
+  WriterEntityFactory::createCell('Author 1', $style),
+  WriterEntityFactory::createCell('Author 1 Institution', $style),
+  WriterEntityFactory::createCell('Author 2', $style),
+  WriterEntityFactory::createCell('Author 2 Institution', $style),
+  WriterEntityFactory::createCell('Author 3', $style),
+  WriterEntityFactory::createCell('Author 3 Institution', $style),
+  WriterEntityFactory::createCell('Author 4', $style),
+  WriterEntityFactory::createCell('Author 4 Institution', $style),
+  WriterEntityFactory::createCell('Author 5', $style),
+  WriterEntityFactory::createCell('Author 5 Institution', $style),
+  WriterEntityFactory::createCell('Author 6', $style),
+  WriterEntityFactory::createCell('Author 6 Institution', $style),
+  WriterEntityFactory::createCell('Author 7', $style),
+  WriterEntityFactory::createCell('Author 7 Institution', $style),
+  WriterEntityFactory::createCell('Author 8', $style),
+  WriterEntityFactory::createCell('Author 8 Institution', $style),
+  WriterEntityFactory::createCell('Author 9', $style),
+  WriterEntityFactory::createCell('Author 9 Institution', $style),
+  WriterEntityFactory::createCell('Author 10', $style),
+  WriterEntityFactory::createCell('Author 10 Institution', $style),
+  WriterEntityFactory::createCell('Author 11', $style),
+  WriterEntityFactory::createCell('Author 11 Institution', $style),
+  WriterEntityFactory::createCell('Author 12', $style),
+  WriterEntityFactory::createCell('Author 12 Institution', $style),
+  WriterEntityFactory::createCell('Author 13', $style),
+  WriterEntityFactory::createCell('Author 13 Institution', $style),
+  WriterEntityFactory::createCell('Author 14', $style),
+  WriterEntityFactory::createCell('Author 14 Institution', $style),
+  WriterEntityFactory::createCell('Author 15', $style),
+  WriterEntityFactory::createCell('Author 15 Institution', $style),
+  WriterEntityFactory::createCell('Author 16', $style),
+  WriterEntityFactory::createCell('Author 16 Institution', $style),
+  WriterEntityFactory::createCell('Author 17', $style),
+  WriterEntityFactory::createCell('Author 17 Institution', $style),
+  WriterEntityFactory::createCell('Author 18', $style),
+  WriterEntityFactory::createCell('Author 18 Institution', $style),
+];
+$writer->addRow(WriterEntityFactory::createRow($cells));
+$writer->close();
 
 /**
  * Does the scrapping of a webpage.
