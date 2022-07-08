@@ -2,8 +2,7 @@
 
 namespace Galoa\ExerciciosPhp2022\WebScrapping;
 
-//use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
-//use Box\Spout\Common\Entity\Row;
+use DOMXPath;
 
 /**
  * Does the scrapping of a webpage.
@@ -16,79 +15,57 @@ class Scrapper {
   public function scrap(\DOMDocument $dom): void {
     //print $dom->saveHTML(); error_reporting(E_ERROR | E_PARSE);
 
-    /*$writer = WriterEntityFactory::createXLSXWriter();
+    $xpath = new DOMXPath($dom);
 
-    $writer->openToFile('teste.xlsx');
+    foreach ($xpath->evaluate("//a") as $node) {
+      // ID
+      echo "\n\n" . $xpath->evaluate('string(div[2]/div[2]/div[2])', $node);
 
-    $cells = [
-      WriterEntityFactory::createCell('Carl'),
-      WriterEntityFactory::createCell('is'),
-      WriterEntityFactory::createCell('great!'),
-    ];
+      // Title
+      echo "\n\n" . $xpath->evaluate('string(h4[1])', $node);
 
-    $singleRow = WriterEntityFactory::createRow($cells);
-    $writer->addRow($singleRow);  
+      // Type
+      echo "\n\n" . $xpath->evaluate('string(div[2]/div[1])', $node);
 
-    $values = ['Carl', 'is', 'great!'];
-    $rowFromValues = WriterEntityFactory::createRowFromArray($values);
-    $writer->addRow($rowFromValues);
+      // Author
+      echo "\n\n" . $xpath->evaluate('string(div[1]/span[1])', $node);
+      echo "\n\n" . $xpath->evaluate('string(div[1]/span[2])', $node);
+      echo "\n\n" . $xpath->evaluate('string(div[1]/span[3])', $node);
+      echo "\n\n" . $xpath->evaluate('string(div[1]/span[4])', $node);
+      echo "\n\n" . $xpath->evaluate('string(div[1]/span[5])', $node);
+      echo "\n\n" . $xpath->evaluate('string(div[1]/span[6])', $node);
+      echo "\n\n" . $xpath->evaluate('string(div[1]/span[7])', $node);
+      echo "\n\n" . $xpath->evaluate('string(div[1]/span[8])', $node);
+      echo "\n\n" . $xpath->evaluate('string(div[1]/span[9])', $node);
+      echo "\n\n" . $xpath->evaluate('string(div[1]/span[10])', $node);
+      echo "\n\n" . $xpath->evaluate('string(div[1]/span[11])', $node);
+      echo "\n\n" . $xpath->evaluate('string(div[1]/span[12])', $node);
+      echo "\n\n" . $xpath->evaluate('string(div[1]/span[13])', $node);
+      echo "\n\n" . $xpath->evaluate('string(div[1]/span[14])', $node);
+      echo "\n\n" . $xpath->evaluate('string(div[1]/span[15])', $node);
+      echo "\n\n" . $xpath->evaluate('string(div[1]/span[16])', $node);
+      echo "\n\n" . $xpath->evaluate('string(div[1]/span[17])', $node);
+      echo "\n\n" . $xpath->evaluate('string(div[1]/span[18])', $node);
 
-    $writer->close();*/
-
-
-
-    $titleTag = $dom->getElementsByTagName("h4");
-    $titleList = '';
-    foreach($titleTag as $link){
-      if(strpos($link->getAttribute('class'), 'my-xs paper-title') === 0){
-        $titleList .= $link->textContent . "\n";
-      }
+      // Author Institution
+      echo "\n\n" . $xpath->evaluate('string(div[1]/span[1]/@title)', $node);
+      echo "\n\n" . $xpath->evaluate('string(div[1]/span[2]/@title)', $node);
+      echo "\n\n" . $xpath->evaluate('string(div[1]/span[3]/@title)', $node);
+      echo "\n\n" . $xpath->evaluate('string(div[1]/span[4]/@title)', $node);
+      echo "\n\n" . $xpath->evaluate('string(div[1]/span[5]/@title)', $node);
+      echo "\n\n" . $xpath->evaluate('string(div[1]/span[6]/@title)', $node);
+      echo "\n\n" . $xpath->evaluate('string(div[1]/span[7]/@title)', $node);
+      echo "\n\n" . $xpath->evaluate('string(div[1]/span[8]/@title)', $node);
+      echo "\n\n" . $xpath->evaluate('string(div[1]/span[9]/@title)', $node);
+      echo "\n\n" . $xpath->evaluate('string(div[1]/span[10]/@title)', $node);
+      echo "\n\n" . $xpath->evaluate('string(div[1]/span[11]/@title)', $node);
+      echo "\n\n" . $xpath->evaluate('string(div[1]/span[12]/@title)', $node);
+      echo "\n\n" . $xpath->evaluate('string(div[1]/span[13]/@title)', $node);
+      echo "\n\n" . $xpath->evaluate('string(div[1]/span[14]/@title)', $node);
+      echo "\n\n" . $xpath->evaluate('string(div[1]/span[15]/@title)', $node);
+      echo "\n\n" . $xpath->evaluate('string(div[1]/span[16]/@title)', $node);
+      echo "\n\n" . $xpath->evaluate('string(div[1]/span[17]/@title)', $node);
+      echo "\n\n" . $xpath->evaluate('string(div[1]/span[18]/@title)', $node);
     }
-    file_put_contents("titulos.txt", $titleList);
-
-
-    $uniTag = $dom->getElementsByTagName("span");
-    $uniList = '';
-    $authorList = '';
-    foreach($uniTag as $link){
-      $title = $link->getAttribute('title');
-
-      if(!empty($title)){
-        $uniList .= $link->getAttribute('title') . "\n";
-        $authorList .= $link->textContent . "\n";
-      }
-    }
-    file_put_contents("universidades.txt", $uniList);
-    file_put_contents("autores.txt", $authorList);
-
-
-    $typeTag = $dom->getElementsByTagName("div");
-    $typeList = '';
-    $idList = '';
-    foreach($typeTag as $link){
-      if(strpos($link->getAttribute('class'), 'tags mr-sm') === 0){ 
-        $typeList .= $link->textContent . "\n";
-      }
-
-      if(strpos($link->getAttribute('class'), 'volume-info') === 0){
-        $idList .= $link->textContent . "\n";
-      }
-    }
-    file_put_contents("tipos.txt", $typeList);
-    file_put_contents("ids.txt", $idList);
-
-    /*$elements = $dom->getElementsByTagName("a");
-    $titleList = '';
-    $uniList = '';
-    $authorList = '';
-    $typeList = '';
-    $idList = '';
-
-    foreach($elements as $link){
-      if(strpos($link->getAttribute('class'), 'my-xs paper-title') === 0){
-        $titleList .= $link->item(0)->textContent . "\n";
-      }
-    }
-    file_put_contents("titulos.txt", $titleList);*/
   }
 }
