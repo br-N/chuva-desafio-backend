@@ -39,6 +39,10 @@ class Battlefield implements BattlefieldInterface {
                 $defense += 1;
             }
         }
-        # ... continua ...
+
+        $attackingCountry->killTroops($defense);
+        $defendingCountry->killTroops($attack);
+
+        $attackingCountry->conquer($defendingCountry);
     }
 }

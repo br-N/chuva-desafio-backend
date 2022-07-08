@@ -45,7 +45,7 @@ class BaseCountry implements CountryInterface {
   }
 
   public function isConquered(): bool{
-    if ($this->troops<1){
+    if ($this->getNumberOfTroops()<1){
       return True;
     }else{
       return False;
@@ -53,10 +53,13 @@ class BaseCountry implements CountryInterface {
   }
 
   public function conquer(CountryInterface $conqueredCountry): void{
-    if($conqueredCountry->getNumberOfTroops()<1){
-      $this->neighbors_list = [
-        $this->name => $conqueredCountry->getNeighbors(),
-      ];
+    if($conqueredCountry->isConquered()){
+      $conqueredCountry->name = 'conquered';
+      foreach($conqueredCountry->getNeighbors() as $neighbor){
+        if(!in_array($neighbor, $this->getNeighbors(), true)){
+            array_push($this->neighbors_list, $neighbor);
+        }
+      }
     }
   }
 
