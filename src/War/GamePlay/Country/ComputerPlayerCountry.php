@@ -21,8 +21,9 @@ class ComputerPlayerCountry extends BaseCountry {
   public function chooseToAttack(): ?CountryInterface {
     $x = rand(1,2);
     if($x==1){
-      $y = rand(0, count($this->getNeighbors()));
-      return $this->getNeighbors()[$y];
+      $neighbors = $this->getNeighbors();
+      $rand_country = array_rand($neighbors, 1);
+      return $neighbors[$rand_country];
     }else{
       return NULL;
     }
